@@ -1,48 +1,46 @@
-import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
 
+    const navigate = useNavigate();
+
     return (
         <div className='header-container'>
-            <Navbar bg="info" expand="lg" variant="dark">
+            <Navbar expand="lg" variant="dark">
                 <Container className='text-white'>
-                    <Navbar.Brand>
+                    <Nav.Link>
                         <Link to='/'>
-                            Users App
+                            <i class="fa fa-home" aria-hidden="true"></i>
                         </Link>
-                    </Navbar.Brand>
+                    </Nav.Link>
+
+                    <Nav.Link>
+                        <Link to='/posts'>
+                            <i className="fa fa-search" aria-hidden="true"></i>
+                        </Link>
+                    </Nav.Link>
+
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
 
-                        <Nav className="m-auto">
-                            <Form className="d-flex m-auto" >
-                                <FormControl
-                                    type="search"
-                                    placeholder="Search"
-                                    className="me-2"
-                                    aria-label="Search"
-                                />
-                                <Button variant="outline-light">Search</Button>
-                            </Form>
-                        </Nav>
+                        <NavDropdown title="" id="nav-dropdown">
 
-                        <Nav
-                            className="my-2 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <Nav.Link href="/user">
-                                <Link to='/user'>
-                                    Users
-                                </Link>
+                            <Nav.Link href="/users">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+
+
+                            </Nav.Link>
+                            <Nav.Link onClick={() => {
+                                localStorage.removeItem('userInfo');
+                                navigate("/")
+                            }}>
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+
 
                             </Nav.Link>
 
-                            <Nav.Link>
-                                Logout
-                            </Nav.Link>
-                        </Nav>
+                        </NavDropdown>
 
                     </Navbar.Collapse>
                 </Container>

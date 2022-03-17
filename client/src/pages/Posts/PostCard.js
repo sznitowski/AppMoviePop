@@ -1,65 +1,81 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { Card, ListGroup, ListGroupItem, Row, Col, Button, PageItem, Modal } from "react-bootstrap";
+import './PostCard.css'
 import MainPage from "../../components/MainPage";
-import { Button, Table } from "react-bootstrap";
 import axios from "axios";
 
-
 function PostCard() {
-
-    const [users, setUsers] = useState([])
-
-    const fetchUsers = async () => {
-        const config = {
-            headers: {
-                "Content-type": "application/json",
-            },
-        };
-        const { data } = await axios.get('/api/posts', config);
-        setUsers(data.data)
-        console.log(data)
+    const [show, setShow] = useState(false);
+    const [posts, setPosts] = useState([])
+    const [getPostById, setGetPostById] = useState([])
+    async function getAllData() {
+        try {
+            const { data } = await axios.get("/api/posts");
+            setPosts(data.data);
+        } catch (err) {
+        }
+    }
+    const getDataById = async (id) => {
+        console.log(id)
+        if (id) {
+            try {
+                const data = await axios.get(`/api/posts/${id}`);
+                setGetPostById(data.data);
+            } catch (err) {
+            }
+        }
     }
     useEffect(() => {
-        fetchUsers();
+        getAllData();
+        getDataById();
+        setShow();
     }, [])
 
     return (
-        <>
-            <MainPage title='Welcome'>
-                <Link to="user">
-                </Link>
-                <Table className="table table-hover table-dark">
-                    <thead>
-                        <tr>
-                            <th>title</th>
-                            <th>image</th>
-                            <th>actions</th>
-                        </tr>
-                    </thead>
+        <MainPage title='Película'>
+            {getPostById && posts.map(post => (
+                <div /* onClick={() => (getDataById(post._id))} */ className="main-card-container">
+                    <div className="card-body" key={post._id}>
+                    
+                        <img className='card-image' variant="top" src={post.image} />
+                        <h2>{post.title}</h2>
+                    </div>
+                    <Button key={post._id} variant="primary" onClick={() => (getDataById(setShow(true)))}>
+                        Ir a...
+                    </Button>
 
-                    <tbody>
-                        {/* {loading && <Loader />}
-                        {error && <ErrorMessage variant='danger'>
-                            {error}</ErrorMessage>} */}
+                    <Modal
+                        show={show}
+                        onHide={() => setShow(false)}
+                        dialogClassName="modal-90w"
+                        aria-labelledby="example-custom-modal-styling-title"
+                    >
+                        <Modal.Header closeButton>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Card.Body key={post._id}>
+                                <Card.Img className='card-image' variant="top" src={post.image} />
+                                <Card.Title>{post.title}</Card.Title>
+                                <ListGroup className="list-group-flush">
+                                    <ListGroupItem>{post.languaje}</ListGroupItem>
+                                    <ListGroupItem>{post.gender}</ListGroupItem>
+                                    <ListGroupItem>{post.date}</ListGroupItem>
+                                </ListGroup>
+                                <Card.Text>
+                                    {post.synopsis}
+                                </Card.Text>
+                            </Card.Body>
+                        </Modal.Body>
+                    </Modal>
 
-                        {users && users.map(user => (
-                            <>
-                                <tr key={user.id}>
-                                    <td>{user.title}</td>
-                                    <td>{user.image}</td>                        
-
-                                </tr>
-                            </>
-                        )
-                        )}
-
-                    </tbody>
-                </Table>
-
-            </MainPage >
-        </>
+                </div>
+            ))
+            }
+        </MainPage >
     );
-
 }
 
 export default PostCard;
+
+

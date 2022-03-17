@@ -1,80 +1,98 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import MainPage from "../../components/MainPage";
-import { Button, Table } from "react-bootstrap";
+import { Card, Button, Modal, ListGroup, ListGroupItem } from "react-bootstrap";
 import axios from "axios";
-
+import './PostList.css'
 
 function PostsList() {
 
-    const [users, setUsers] = useState([])
+    const [show, setShow] = useState(false);
+    const [posts, setPosts] = useState([])
+    const [getPostById, setGetPostById] = useState([])
 
-    const fetchUsers = async () => {
+    const fetchPosts = async () => {
         const config = {
             headers: {
                 "Content-type": "application/json",
             },
         };
+
         const { data } = await axios.get('/api/posts', config);
-        setUsers(data.data)
+
+        setPosts(data.data)
         console.log(data)
     }
+
+    const fetchPostById = async (id) => {
+        const config = {
+            headers: {
+                "Content-type": "application/json",
+            },
+        };
+        console.log(id)
+        if (id) {
+            try {
+                const data = await axios.get(`/api/posts/${id}`, config);
+                setGetPostById(data.data);
+            } catch (err) {
+            }
+        }
+    }
     useEffect(() => {
-        fetchUsers();
+        fetchPostById();
+        fetchPosts();
     }, [])
 
     return (
         <>
-            <MainPage title='Welcome'>
-                <Link to="user">
-                </Link>
-                <Table className="table table-hover table-dark">
-                    <thead>
-                        <tr>
-                            <th>title</th>
-                            <th>image</th>
-                            <th>actions</th>
-                        </tr>
-                    </thead>
+            <MainPage title='Listado de películas'>
+                <h2 className="mb-2 ml-2" tittle='Películas'>
+                    Peliculas
+                </h2>
+                {posts && posts.map(post => (
+                    <div className="post-list">
 
-                    <tbody>
-                        {/* {loading && <Loader />}
-                        {error && <ErrorMessage variant='danger'>
-                            {error}</ErrorMessage>} */}
+                        <Card color="primary" className="px-4">
+                            <div key={post._id}>
+                                <Card.Img variant="top" src={post.image} />
+                                <Card.Body>
+                                    <Card.Title>{post.title}</Card.Title>
+                                    {/* <Button key={post._id} variant="primary" onClick={() => (getPostById(setShow(true)))}>
+                                        Ir a...
+                                    </Button> */}
+                                </Card.Body>
+                            </div>
 
-                        {users && users.map(user => (
-                            <>
-                                <tr key={user.id}>
-                                    <td>{user.title}</td>
-                                    <td>{user.image}</td>
-                                    <td><Button
-                                        variant="success"
-                                        className="mx-2"
-                                        href={`/user/${user.id}`
-                                        }>Edit
-                                    </Button>
-                                    </td>
-                                    <td>
-                                        <Button
-                                            variant="danger"
-                                            className="mx-2"
-                                        >
-                                            Delete
-                                        </Button>
-                                    </td>
+                        </Card>
 
-                                </tr>
-                            </>
-                        )
-                        )}
-
-                    </tbody>
-                </Table>
-
+                        <Modal
+                            show={show}
+                            onHide={() => setShow(false)}
+                            dialogClassName="modal-90w"
+                        >
+                            <Modal.Header closeButton>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Card.Body key={post._id}>
+                                    <Card.Img className='card-image' variant="top" src={post.image} />
+                                    <Card.Title>{post.title}</Card.Title>
+                                    <ListGroup className="list-group-flush">
+                                        <ListGroupItem>{post.languaje}</ListGroupItem>
+                                        <ListGroupItem>{post.gender}</ListGroupItem>
+                                        <ListGroupItem>{post.date}</ListGroupItem>
+                                    </ListGroup>
+                                    <Card.Text>
+                                        {post.synopsis}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Modal.Body>
+                        </Modal>
+                    </div>
+                ))
+                }
             </MainPage >
         </>
     );
-
 }
 
 export default PostsList;

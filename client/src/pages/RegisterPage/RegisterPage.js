@@ -1,33 +1,67 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MainPage from "../../components/MainPage";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+import Loader from "../../components/Loader/Loader";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
-
-function RegisterPage({ history }) {
+function RegisterPage() {
 
     const [firstName, setfirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-    const [age, setAge] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [message, setMessage] = useState(null);
+    const [message, setMessage] = useState(null)
+    const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(false)
 
+    const navigate = useNavigate();
 
-    /* const submitHandler = async (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
-            setMessage("Passwords do not match");
-        } else dispatch(register(firstName, lastName, email, age, password, confirmPassword));
-    }; */
+            setMessage("Las contraseñas no coinciden");
+        } else {
+            setMessage(null)
+            try {
+                const config = {
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                };
 
+                setLoading(true);
+
+                const { data } = await axios.post(
+                    "api/users",
+                    { firstName, lastName, email, password },
+                    config
+                )
+
+                setLoading(false);
+                localStorage.setItem("userInfo", JSON.stringify(data));
+
+                navigate("/posts")
+
+            } catch (error) {
+                setError(error.response.data.message);
+            }
+        }
+    }
 
     return (
         <MainPage title='Registrarse'>
 
             <div className='registContainer'>
 
-                <Form>
+                {message && <ErrorMessage variant='danger'>{message}</ErrorMessage>}
+                {error && <ErrorMessage variant='danger'>
+                    {error}</ErrorMessage>}
+                {loading && <Loader />}
+
+                <Form onSubmit={submitHandler}>
 
                     <Form.Group className="mb-3" controlId="firstName">
                         <Form.Label>Nombre</Form.Label>
@@ -86,8 +120,8 @@ function RegisterPage({ history }) {
                 </Form>
 
             </div>
-        </MainPage>
 
+        </MainPage>
     )
 }
 

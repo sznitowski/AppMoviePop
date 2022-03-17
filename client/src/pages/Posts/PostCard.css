@@ -1,0 +1,7 @@
+ .card-post {
+    display: inline-block;
+    justify-content: center;
+}
+.card-image {
+    width: 20rem;
+} 
