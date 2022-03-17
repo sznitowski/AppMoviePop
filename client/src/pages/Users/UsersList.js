@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MainPage from "../../components/MainPage";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import axios from "axios";
 
 function UsersList() {
@@ -34,6 +34,7 @@ function UsersList() {
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Email</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
 
@@ -44,6 +45,21 @@ function UsersList() {
                                     <td>{user.firstName}</td>
                                     <td>{user.lastName}</td>
                                     <td>{user.email}</td>
+                                    <td>
+                                        <Button
+                                            variant="success"
+                                            className="mx-2"
+                                            href={`/user/${user.id}`
+                                            }>Edit
+                                        </Button>
+                                
+                                        <Button
+                                            variant="danger"
+                                            className="mx-2">
+                                            Delete
+                                        </Button>
+
+                                    </td>
                                 </tr>
                             </>
                         )

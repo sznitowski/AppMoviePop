@@ -41,6 +41,8 @@
 <hr>
 <img width="960" alt="lista" src="https://user-images.githubusercontent.com/78902757/158724234-28f0d514-18d9-413b-a20d-b461be555279.png">
 <hr>
+<img width="960" alt="users" src="https://user-images.githubusercontent.com/78902757/158729727-cea29d9f-fcc6-4e45-8ff5-050476c0c223.png">
+<hr>
 
 * Aun faltan terminar de estilar y configurar algunas cosas del cliente.
 
@@ -48,5 +50,5 @@
 ![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github)
 [![Git](https://img.shields.io/badge/-Git-black?style=flat&logo=git&link=https://github.com/BRdhanani)](https://github.com/sznitowski) 
 ![Heroku](https://img.shields.io/badge/-Heroku-430098?style=flat-square&logo=heroku)
-* Heroku, para deployar mi api (una ves terminada)
+* Heroku, para deployar mi api (cuando la termine).
 
