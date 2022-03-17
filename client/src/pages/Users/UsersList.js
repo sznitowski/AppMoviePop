@@ -50,13 +50,13 @@ function UsersList() {
                                             variant="success"
                                             className="mx-2"
                                             href={`/user/${user.id}`
-                                            }>Edit
+                                            }>Editar
                                         </Button>
                                 
                                         <Button
                                             variant="danger"
                                             className="mx-2">
-                                            Delete
+                                            Eliminar
                                         </Button>
 
                                     </td>
