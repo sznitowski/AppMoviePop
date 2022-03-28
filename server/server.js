@@ -20,11 +20,11 @@ app.use('/api/posts', postRoutes);
 
 /* Deployment */
 
-/* if (process.env.NODE_ENV === 'production') {
+ if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
-} */
+} 
 
-const __dirname = path.resolve();
+/* const __dirname = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "/client/build")));
@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === "production") {
     app.get("/", (req, res) => {
         res.send("API is running..");
     });
-}
+} */
 
 /* Deployment */
 
