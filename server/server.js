@@ -25,7 +25,7 @@ app.use('/api/posts', postRoutes);
 } */
 
 
-if (process.env.NODE_ENV) {
+if (process.env.NODE_ENV --- "production") {
     //static folder add
   app.use(express.static('client/build'));
   app.get("*", function (req, res) {

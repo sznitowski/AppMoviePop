@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd client && npm run build",
-    "client": "npm start --prefix client",
-    "client-install": "npm install --prefix client",
+    "install-client": "cd client && npm install",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build",
-    "start": "cd server && npm install && node server.js"
+    "start": "cd server && npm install && node server.js",
+    "client": "cd client && npm start"
   },
   "repository": {
     "type": "git",
