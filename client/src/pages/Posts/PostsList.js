@@ -29,7 +29,7 @@ function PostCard() {
                 "Content-type": "application/json",
             },
         };
-
+        console.log(id)
         if (id) {
             try {
                 const { data } = await axios.get(`/api/posts/${id}`, config);
@@ -66,7 +66,7 @@ function PostCard() {
 
                 <Modal className="modal-card" show={show} onHide={handleClose} animation={false}>
                     <Modal.Header>
-                        <Card><img className="image-card" src={getPostById?.image} /></Card>
+                        <Card><img src={getPostById?.image} /></Card>
                     </Modal.Header>
 
                     <Modal.Body>
