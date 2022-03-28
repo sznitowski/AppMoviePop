@@ -16,7 +16,7 @@ function PostCard() {
 
     async function getAllData() {
         try {
-            const { data } = await axios.get("https://appmoviepop-mern.herokuapp.com/api/posts");
+            const { data } = await axios.get("/api/posts");
             setPosts(data.data);
         } catch (err) {
         }
