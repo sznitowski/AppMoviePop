@@ -1,98 +1,106 @@
 import { useEffect, useState } from "react";
+import { Card, ListGroup, ListGroupItem, Button, Modal } from "react-bootstrap";
 import MainPage from "../../components/MainPage";
-import { Card, Button, Modal, ListGroup, ListGroupItem } from "react-bootstrap";
 import axios from "axios";
 import './PostList.css'
 
-function PostsList() {
+function PostCard() {
+
+    const [posts, setPosts] = useState([])
+    const [getPostById, setGetPostById] = useState({})
 
     const [show, setShow] = useState(false);
-    const [posts, setPosts] = useState([])
-    const [getPostById, setGetPostById] = useState([])
+    const handleClose = () => setShow(false);
 
-    const fetchPosts = async () => {
-        const config = {
-            headers: {
-                "Content-type": "application/json",
-            },
-        };
 
-        const { data } = await axios.get('/api/posts', config);
 
-        setPosts(data.data)
-        console.log(data)
+    async function getAllData() {
+        try {
+            const { data } = await axios.get("/api/posts");
+            setPosts(data.data);
+        } catch (err) {
+        }
     }
 
-    const fetchPostById = async (id) => {
+    const getDataById = async (id) => {
         const config = {
             headers: {
+                "Accept": "application/json",
                 "Content-type": "application/json",
             },
         };
-        console.log(id)
+
         if (id) {
             try {
-                const data = await axios.get(`/api/posts/${id}`, config);
+                const { data } = await axios.get(`/api/posts/${id}`, config);
                 setGetPostById(data.data);
+                console.log(data)
             } catch (err) {
             }
         }
     }
     useEffect(() => {
-        fetchPostById();
-        fetchPosts();
-    }, [])
+        getAllData();
+    }, [getPostById])
+
+    const showMovie = (id) => {
+        getDataById(id)
+        setShow(true)
+    }
 
     return (
         <>
-            <MainPage title='Listado de películas'>
-                <h2 className="mb-2 ml-2" tittle='Películas'>
-                    Peliculas
-                </h2>
-                {posts && posts.map(post => (
-                    <div className="post-list">
+            <MainPage title='Película'>
 
-                        <Card color="primary" className="px-4">
-                            <div key={post._id}>
-                                <Card.Img variant="top" src={post.image} />
-                                <Card.Body>
-                                    <Card.Title>{post.title}</Card.Title>
-                                    {/* <Button key={post._id} variant="primary" onClick={() => (getPostById(setShow(true)))}>
-                                        Ir a...
-                                    </Button> */}
-                                </Card.Body>
-                            </div>
+                {posts.length > 0 && posts.map(post => (
 
-                        </Card>
+                    <div className="post-list" onClick={() => (showMovie(post._id))}>
 
-                        <Modal
-                            show={show}
-                            onHide={() => setShow(false)}
-                            dialogClassName="modal-90w"
-                        >
-                            <Modal.Header closeButton>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Card.Body key={post._id}>
-                                    <Card.Img className='card-image' variant="top" src={post.image} />
-                                    <Card.Title>{post.title}</Card.Title>
-                                    <ListGroup className="list-group-flush">
-                                        <ListGroupItem>{post.languaje}</ListGroupItem>
-                                        <ListGroupItem>{post.gender}</ListGroupItem>
-                                        <ListGroupItem>{post.date}</ListGroupItem>
-                                    </ListGroup>
-                                    <Card.Text>
-                                        {post.synopsis}
-                                    </Card.Text>
-                                </Card.Body>
-                            </Modal.Body>
-                        </Modal>
+                        <div className="cards-body" key={post._id}>
+                            <img className='card-image' variant="top" src={post.image} />
+                            <h2>{post.title}</h2>
+                        </div>
                     </div>
-                ))
-                }
+                ))}
+
+
+                <Modal className="modal-card" show={show} onHide={handleClose} animation={false}>
+                    <Modal.Header>
+                        <Card><img className="image-card" src={getPostById?.image} /></Card>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Modal.Title>
+                            <h2 className="text-center">Título: {getPostById?.title}</h2>
+                           
+                            </Modal.Title>
+                        <Card>
+                            <h5>Lenguaje: {getPostById?.languaje}</h5>
+                        </Card>
+                        <Card>
+                            <h5>Género: {getPostById?.gender}</h5>
+                        </Card>
+                        <Card>
+                            <h5>Fecha de lanzamiento: {getPostById?.date}</h5>
+                        </Card>
+                        <Card>
+                            <h5 className="text-center">Sinopsis: </h5>
+                            {getPostById?.synopsis}
+                        </Card>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Cerrar
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
             </MainPage >
         </>
     );
 }
 
-export default PostsList;
+export default PostCard;
+
+

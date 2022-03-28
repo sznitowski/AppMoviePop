@@ -4,7 +4,6 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import UsersList from './pages/Users/UsersList';
 import PostsList from './pages/Posts/PostsList';
-/* import PostCard from './pages/Posts/PostCard'; */
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -18,7 +17,6 @@ function App() {
         <Route path='/register' element={<RegisterPage />} exact />
         <Route path='/users' element={<UsersList />} exact />
         <Route path='/posts' element={<PostsList />} exact />
-        {/* <Route path='/post' element={<PostCard />} exact /> */}
       </Routes>
     </BrowserRouter>
   );

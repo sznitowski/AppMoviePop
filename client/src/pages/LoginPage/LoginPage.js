@@ -49,14 +49,14 @@ function LoginPage() {
 
     return <MainPage title="Iniciar sesión">
 
-        <div className="loginContainer">
+        <div className="login-container">
 
             {error && <ErrorMessage variant='danger'>
                 {error}</ErrorMessage>}
             {loading && <Loader />}
 
+            <div className="modal-form">
             <Form onSubmit={submitHandler}>
-
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -86,7 +86,7 @@ function LoginPage() {
                     </Col>
                 </Row>
             </Form>
-
+            </div>
         </div>
 
     </MainPage>

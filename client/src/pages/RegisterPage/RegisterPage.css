@@ -1,0 +1,14 @@
+.regist-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    color: white;
+}
+.modal-form {
+    padding: 18px;
+    margin: auto;
+    width: 70%;
+    background-color: #0b1E35;
+    border: ridge;
+    border-radius: 6px;
+}

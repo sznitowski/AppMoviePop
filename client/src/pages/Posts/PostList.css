@@ -1,6 +1,25 @@
 .post-list {
-    margin: auto;
+    margin: 2px;
     display: inline-block;
     justify-content: center;
     width: 20rem;
+    border: outset;
+    border-radius: 6px;
+}
+.post-list:hover {
+    padding: 2px 4px;
+    overflow: hidden;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+.card-post {
+    margin: auto;
+    display: inline-block;
+    justify-content: center;
+}
+.card-image {
+    width: 20rem;
+}
+.modal-card {
+    background-color: #0b1e35;
 }

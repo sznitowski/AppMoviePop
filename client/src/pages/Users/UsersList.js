@@ -7,6 +7,7 @@ import axios from "axios";
 function UsersList() {
 
     const [users, setUsers] = useState([])
+    const [updateUser, setUpdateUser] = useState()
 
     const fetchUsers = async () => {
         const config = {
@@ -18,6 +19,19 @@ function UsersList() {
         setUsers(data.data)
         console.log(data)
     }
+
+    const fetchUpdateUser = async (id) => {
+        console.log(id)
+        if (id) {
+            try {
+                const { data } = await axios.get(`/api/posts/${id}`);
+                setUpdateUser(data.data);
+                console.log(data)
+            } catch (err) {
+            }
+        }
+    }
+
     useEffect(() => {
         fetchUsers();
     }, [])

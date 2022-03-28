@@ -5,6 +5,7 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import "./RegisterPage.css"
 
 function RegisterPage() {
 
@@ -54,71 +55,73 @@ function RegisterPage() {
     return (
         <MainPage title='Registrarse'>
 
-            <div className='registContainer'>
+            <div className='regist-container'>
 
                 {message && <ErrorMessage variant='danger'>{message}</ErrorMessage>}
                 {error && <ErrorMessage variant='danger'>
                     {error}</ErrorMessage>}
                 {loading && <Loader />}
 
-                <Form onSubmit={submitHandler}>
+                <div className="modal-form">
+                    <Form onSubmit={submitHandler}>
 
-                    <Form.Group className="mb-3" controlId="firstName">
-                        <Form.Label>Nombre</Form.Label>
-                        <Form.Control
-                            type="name"
-                            placeholder="Porfavor Ingrese su numbre"
-                            value={firstName}
-                            onChange={(e) => setfirstName(e.target.value)}
-                        />
-                    </Form.Group>
+                        <Form.Group className="mb-3" controlId="firstName">
+                            <Form.Label>Nombre</Form.Label>
+                            <Form.Control
+                                type="name"
+                                placeholder="Porfavor Ingrese su numbre"
+                                value={firstName}
+                                onChange={(e) => setfirstName(e.target.value)}
+                            />
+                        </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="lastName">
-                        <Form.Label>Apellido</Form.Label>
-                        <Form.Control
-                            type="lastname"
-                            placeholder="Por favor ingrese su apellido"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
-                    </Form.Group>
+                        <Form.Group className="mb-3" controlId="lastName">
+                            <Form.Label>Apellido</Form.Label>
+                            <Form.Control
+                                type="lastname"
+                                placeholder="Por favor ingrese su apellido"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                            />
+                        </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            type="email"
-                            placeholder="Ingrese su Email porfavor"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                type="email"
+                                placeholder="Ingrese su Email porfavor"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>contraseña</Form.Label>
-                        <Form.Control
-                            type="password"
-                            placeholder="Porfavor Ingrese una contraseña"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>contraseña</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="Porfavor Ingrese una contraseña"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-                        <Form.Label>confirmar contraseña</Form.Label>
-                        <Form.Control
-                            type="password"
-                            placeholder="Confirme su contraseña porfavor"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                    </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
+                            <Form.Label>confirmar contraseña</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="Confirme su contraseña porfavor"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                            />
+                        </Form.Group>
 
-                    <Button variant="primary" type="submit">
-                        Enviar
-                    </Button>
+                        <Button variant="primary" type="submit">
+                            Enviar
+                        </Button>
 
-                </Form>
+                    </Form>
 
+                </div>
             </div>
 
         </MainPage>
