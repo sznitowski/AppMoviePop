@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 } */
 
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE.ENV === 'production') {
     app.use('/', express.static(path.join(__dirname, 'client/build')))
 
     app.use('/api/users', userRoutes);
