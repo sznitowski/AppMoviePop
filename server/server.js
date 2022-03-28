@@ -15,8 +15,7 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/api/users', userRoutes);
-app.use('/api/posts', postRoutes);
+
 
 /* Deployment */
 
@@ -26,12 +25,13 @@ app.use('/api/posts', postRoutes);
 
 
 if (process.env.NODE_ENV === 'production') {
-    app.use('/', express.static(path.join(__dirname, 'build')))
+    app.use('/', express.static(path.join(__dirname, 'client/build')))
 
-
-    app.get('*', function(req, res) {
+    app.use('/api/users', userRoutes);
+    app.use('/api/posts', postRoutes);
+    app.get('*', function (req, res) {
         res.sendFile(path.join(__dirname, 'build', 'index.html'));
-      });
+    });
 
 }
 
