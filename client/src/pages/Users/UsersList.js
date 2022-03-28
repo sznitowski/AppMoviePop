@@ -48,7 +48,6 @@ function UsersList() {
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Email</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
 
@@ -60,7 +59,7 @@ function UsersList() {
                                     <td>{user.lastName}</td>
                                     <td>{user.email}</td>
                                     <td>
-                                        <Button
+                               {/*          <Button
                                             variant="success"
                                             className="mx-2"
                                             href={`/user/${user.id}`
@@ -71,7 +70,7 @@ function UsersList() {
                                             variant="danger"
                                             className="mx-2">
                                             Eliminar
-                                        </Button>
+                                        </Button> */}
 
                                     </td>
                                 </tr>
