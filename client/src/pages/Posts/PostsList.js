@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, ListGroup, ListGroupItem, Button, Modal } from "react-bootstrap";
+import { Card, Button, Modal } from "react-bootstrap";
 import MainPage from "../../components/MainPage";
 import axios from "axios";
 import './PostList.css'
@@ -29,7 +29,6 @@ function PostCard() {
                 "Content-type": "application/json",
             },
         };
-        console.log(id)
         if (id) {
             try {
                 const { data } = await axios.get(`/api/posts/${id}`, config);
