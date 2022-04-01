@@ -15,7 +15,7 @@ function UsersList() {
                 "Content-type": "application/json",
             },
         };
-        const { data } = await axios.get('http://localhost:3000/api/users', config);
+        const { data } = await axios.get('/api/users', config);
         setUsers(data.data)
         console.log(data)
     }
@@ -48,6 +48,7 @@ function UsersList() {
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Email</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
 
@@ -59,7 +60,7 @@ function UsersList() {
                                     <td>{user.lastName}</td>
                                     <td>{user.email}</td>
                                     <td>
-                               {/*          <Button
+                                         <Button
                                             variant="success"
                                             className="mx-2"
                                             href={`/user/${user.id}`
@@ -70,7 +71,7 @@ function UsersList() {
                                             variant="danger"
                                             className="mx-2">
                                             Eliminar
-                                        </Button> */}
+                                        </Button>
 
                                     </td>
                                 </tr>
