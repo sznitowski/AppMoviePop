@@ -1,8 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
-const cors = require('cors')
 const userRoutes = require('./routes/user.routes');
+const cors = require('cors');
 const postRoutes = require('./routes/post.routes');
 const path = require("path");
 
@@ -13,24 +13,25 @@ dotenv.config();
 
 connectDB();
 app.use(express.json());
-
-app.use(express.urlencoded({ extended: false }));
-// CORS Middleware
 app.use(cors());
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 
 /* Deployment */
 
-if (process.env.NODE.ENV === 'production') {
-    // Set static folder
-    app.use(express.static('client/build'));
-  
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, 'client', 'build')));
+
     app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
     });
-  }
+} else {
+    app.get("/", (req, res) => {
+        res.send("Api is running..")
+    })
+}
 
 /* Deployment */
 
