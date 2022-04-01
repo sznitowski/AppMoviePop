@@ -16,7 +16,7 @@ function PostCard() {
 
     async function getAllData() {
         try {
-            const { data } = await axios.get("/api/posts");
+            const { data } = await axios.get("http://localhost:3000/api/posts");
             setPosts(data.data);
         } catch (err) {
         }
@@ -31,7 +31,7 @@ function PostCard() {
         };
         if (id) {
             try {
-                const { data } = await axios.get(`/api/posts/${id}`, config);
+                const { data } = await axios.get(`http://localhost:3000/api/posts/${id}`, config);
                 setGetPostById(data.data);
                 console.log(data)
             } catch (err) {

@@ -15,7 +15,7 @@ function UsersList() {
                 "Content-type": "application/json",
             },
         };
-        const { data } = await axios.get('/api/users', config);
+        const { data } = await axios.get('http://localhost:3000/api/users', config);
         setUsers(data.data)
         console.log(data)
     }
