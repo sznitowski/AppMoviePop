@@ -4,8 +4,8 @@
   "description": "Api crud",
   "main": "server.js",
   "scripts": {
-    "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
+    "build": "cd client && npm run build",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build",
     "start": "cd server && npm install && node server.js",
     "client": "cd client && npm start",
