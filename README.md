@@ -1,8 +1,6 @@
 ## AppMoviePop
 ***
 ***
-## Examen técnico Sitenso
-
 ### Algunas tecnologías utilizadas en el servidor:
 <img src="https://img.shields.io/badge/-Node.js-3C873A?style=flat&logo=Node.js&logoColor=white">
 <img src="https://img.shields.io/badge/-Express.js-787878?style=flat">
@@ -16,8 +14,6 @@
 <img width="960" alt="Mongo" src="https://user-images.githubusercontent.com/78902757/158720488-7cc4606a-b413-420e-9473-9317846a9453.png">
 * Postman, para testear todos los endopoints de users y posts.
 <img width="960" alt="Postman" src="https://user-images.githubusercontent.com/78902757/158720600-2ff0adaf-6711-4462-b3c6-65b7f6731abd.png">
-
-
 
 ***
 ***
@@ -44,11 +40,7 @@
 <img width="960" alt="users" src="https://user-images.githubusercontent.com/78902757/158729727-cea29d9f-fcc6-4e45-8ff5-050476c0c223.png">
 <hr>
 
-* Aun faltan terminar de estilar y configurar algunas cosas del cliente.
-
 ### Otras tecnologías:
 ![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github)
 [![Git](https://img.shields.io/badge/-Git-black?style=flat&logo=git&link=https://github.com/BRdhanani)](https://github.com/sznitowski) 
-![Heroku](https://img.shields.io/badge/-Heroku-430098?style=flat-square&logo=heroku)
-* Heroku, para deployar mi api (cuando la termine).
 
