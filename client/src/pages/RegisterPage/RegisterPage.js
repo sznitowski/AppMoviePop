@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MainPage from "../../components/MainPage";
-import { Form, Button } from "react-bootstrap";
+import { TextField, Button, Grid } from "@mui/material";
 import axios from "axios";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import "./RegisterPage.css"
 
 function RegisterPage() {
-
-    const [firstName, setfirstName] = useState("");
+    const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [message, setMessage] = useState(null)
-    const [error, setError] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const [message, setMessage] = useState(null);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -36,7 +35,7 @@ function RegisterPage() {
                 setLoading(true);
 
                 const { data } = await axios.post(
-                    "api/users",
+                    "/api/users",
                     { firstName, lastName, email, password },
                     config
                 )
@@ -54,78 +53,90 @@ function RegisterPage() {
 
     return (
         <MainPage title='Registrarse'>
-
-            <div className='regist-container'>
-
-                {message && <ErrorMessage variant='danger'>{message}</ErrorMessage>}
-                {error && <ErrorMessage variant='danger'>
-                    {error}</ErrorMessage>}
-                {loading && <Loader />}
-
-                <div className="modal-form">
-                    <Form onSubmit={submitHandler}>
-
-                        <Form.Group className="mb-3" controlId="firstName">
-                            <Form.Label>Nombre</Form.Label>
-                            <Form.Control
-                                type="name"
-                                placeholder="Porfavor Ingrese su numbre"
-                                value={firstName}
-                                onChange={(e) => setfirstName(e.target.value)}
-                            />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="lastName">
-                            <Form.Label>Apellido</Form.Label>
-                            <Form.Control
-                                type="lastname"
-                                placeholder="Por favor ingrese su apellido"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                            />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Ingrese su Email porfavor"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>contraseña</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Porfavor Ingrese una contraseña"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-                            <Form.Label>confirmar contraseña</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Confirme su contraseña porfavor"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                            />
-                        </Form.Group>
-
-                        <Button variant="primary" type="submit">
-                            Enviar
-                        </Button>
-
-                    </Form>
-
-                </div>
-            </div>
-
+            <Grid container justifyContent="center">
+                <Grid item xs={12} sm={6}>
+                    <div className='regist-container'>
+                        {message && <ErrorMessage variant='danger'>{message}</ErrorMessage>}
+                        {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
+                        {loading && <Loader />}
+                        <div className="modal-form">
+                            <form onSubmit={submitHandler}>
+                                <TextField
+                                    fullWidth
+                                    label="Nombre"
+                                    type="text"
+                                    placeholder="Por favor ingrese su nombre"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    variant="outlined"
+                                    margin="normal"
+                                    inputProps={{ style: { background: 'white' } }}
+                                    className="mb-3"
+                                />
+                                <TextField
+                                    fullWidth
+                                    label="Apellido"
+                                    type="text"
+                                    placeholder="Por favor ingrese su apellido"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    variant="outlined"
+                                    margin="normal"
+                                    inputProps={{ style: { background: 'white' } }}
+                                    className="mb-3"
+                                />
+                                <TextField
+                                    fullWidth
+                                    label="Email"
+                                    type="email"
+                                    placeholder="Ingrese su email por favor"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    variant="outlined"
+                                    margin="normal"
+                                    inputProps={{ style: { background: 'white' } }}
+                                    className="mb-3"
+                                />
+                                <TextField
+                                    fullWidth
+                                    label="Contraseña"
+                                    type="password"
+                                    placeholder="Por favor ingrese una contraseña"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    variant="outlined"
+                                    margin="normal"
+                                    inputProps={{ style: { background: 'white' } }}
+                                    className="mb-3"
+                                />
+                                <TextField
+                                    fullWidth
+                                    label="Confirmar contraseña"
+                                    type="password"
+                                    placeholder="Confirme su contraseña por favor"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    variant="outlined"
+                                    margin="normal"
+                                    inputProps={{ style: { background: 'white' } }}
+                                    className="mb-3"
+                                />
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    type="submit"
+                                    fullWidth
+                                    disabled={loading}
+                                >
+                                    {loading ? 'Enviando...' : 'Enviar'}
+                                </Button>
+                            </form>
+                        </div>
+                    </div>
+                </Grid>
+            </Grid>
         </MainPage>
     )
 }
 
-export default RegisterPage
+export default RegisterPage;

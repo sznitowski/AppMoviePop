@@ -1,24 +1,27 @@
-import { Container, Row } from 'react-bootstrap'
-import './MainPage.css'
+import React from 'react';
+import { Container, Typography, Divider, Grid } from '@mui/material';
+import './MainPage.css';
 
-const MainPage = ({title, children}) => {
+const MainPage = ({ title, children }) => {
     return (
         <div className='mainback'>
             <Container>
-                <Row>
-                    <div className='page'>
-                        {title && (
-                            <>
-                            <h1 className='heading'>{title}</h1>
-                            <hr />
-                            </>
-                        )}
-                        {children}
-                    </div>
-                </Row>
+                <Grid container>
+                    <Grid item xs={12}>
+                        <div className='page'>
+                            {title && (
+                                <>
+                                    <Typography variant='h1' className='heading'>{title}</Typography>
+                                    <Divider />
+                                </>
+                            )}
+                            {children}
+                        </div>
+                    </Grid>
+                </Grid>
             </Container>
         </div>
     )
 }
 
-export default MainPage
+export default MainPage;
